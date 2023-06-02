@@ -11,11 +11,16 @@ namespace DoAnThucTap.Models
         [Required(ErrorMessage = "Giá nhập là bắt buộc.")]
         [DisplayName("Giá Nhập")]
         public decimal PriceBuy { get; set; }
-        [Required(ErrorMessage = "Giá nhập là bắt buộc.")]
-        [DisplayName("Giá Nhập")]
+        [Required(ErrorMessage = "Giá bán là bắt buộc.")]
+        [DisplayName("Giá bán")]
         public decimal PriceSell { get; set; }
+        [Required]
+        [DisplayName("Số lượng nhập")]
         public  int Amount { get; set; }
+        [Required]
+        [DisplayName("Số lượng đã bán")]
         public  int Sold { get; set; }
         public  int Active { get; set; }
+        
     }
 }
