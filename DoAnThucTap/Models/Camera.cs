@@ -10,11 +10,9 @@ namespace DoAnThucTap.Models
         [Required(ErrorMessage = "Tên camera là bắt buộc.")]
         [DisplayName("Tên camera")]
         public string Name { get; set; }
-
         [Required(ErrorMessage = "Nhãn hiệu là bắt buộc.")]
         [DisplayName("Nhãn hiệu")]
         public string Brand { get; set; }
-
         [Required(ErrorMessage = "Độ phân giải là bắt buộc.")]
         [DisplayName("Độ phân giải")]
         public string Resolution { get; set; }
