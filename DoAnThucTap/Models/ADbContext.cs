@@ -17,10 +17,6 @@ namespace DoAnThucTap.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Camera>()
-                .Property(c => c.Price)
-                .HasColumnType("decimal(18, 2)");
-
             modelBuilder.Entity<CartItem>()
                 .Property(ci => ci.TotalAmount)
                 .HasColumnType("decimal(18, 2)");

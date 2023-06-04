@@ -13,7 +13,7 @@ namespace DoAnThucTap.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Main()
         {
             return View();
         }

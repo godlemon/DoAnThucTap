@@ -15,7 +15,7 @@ namespace DoAnThucTap.Models
         [Required(ErrorMessage = "Email là bắt buộc.")]
         [EmailAddress(ErrorMessage = "Email không hợp lệ.")]
         public string Email { get; set; }
-
+        public string Status { get; set; }
         public decimal TotalAmount { get; set; }
 
         public List<CartItem> CartItems { get; set; } // Tham chiếu đến danh sách giỏ hàng
