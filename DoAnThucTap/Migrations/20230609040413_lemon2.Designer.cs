@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAnThucTap.Migrations
 {
     [DbContext(typeof(ADbContext))]
-    [Migration("20230602005749_lemon1")]
-    partial class lemon1
+    [Migration("20230609040413_lemon2")]
+    partial class lemon2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,30 @@ namespace DoAnThucTap.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DoAnThucTap.Models.Banner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("active")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("banners");
+                });
 
             modelBuilder.Entity("DoAnThucTap.Models.Camera", b =>
                 {
@@ -41,9 +65,6 @@ namespace DoAnThucTap.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18, 2)");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -51,7 +72,7 @@ namespace DoAnThucTap.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TagsId")
+                    b.Property<int>("TagsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -72,9 +93,6 @@ namespace DoAnThucTap.Migrations
                     b.Property<int>("CameraId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
@@ -87,18 +105,26 @@ namespace DoAnThucTap.Migrations
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CameraId");
 
-                    b.HasIndex("CustomerId");
-
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("DoAnThucTap.Models.Customer", b =>
+            modelBuilder.Entity("DoAnThucTap.Models.Home", b =>
+                {
+                    b.ToTable("homes");
+                });
+
+            modelBuilder.Entity("DoAnThucTap.Models.Menu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,11 +132,11 @@ namespace DoAnThucTap.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
+                    b.Property<string>("Conntent")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -118,13 +144,12 @@ namespace DoAnThucTap.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("active")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Menus");
                 });
 
             modelBuilder.Entity("DoAnThucTap.Models.Order", b =>
@@ -144,6 +169,10 @@ namespace DoAnThucTap.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -179,11 +208,14 @@ namespace DoAnThucTap.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CameraId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Reviews");
                 });
@@ -209,11 +241,84 @@ namespace DoAnThucTap.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("DoAnThucTap.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DoAnThucTap.Models.Warehouses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Active")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CameraId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("PriceBuy")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PriceSell")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Sold")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CameraId");
+
+                    b.ToTable("Warehousess");
+                });
+
             modelBuilder.Entity("DoAnThucTap.Models.Camera", b =>
                 {
-                    b.HasOne("DoAnThucTap.Models.Tags", null)
-                        .WithMany("Cameras")
-                        .HasForeignKey("TagsId");
+                    b.HasOne("DoAnThucTap.Models.Tags", "Tags")
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("DoAnThucTap.Models.CartItem", b =>
@@ -224,19 +329,19 @@ namespace DoAnThucTap.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DoAnThucTap.Models.Customer", "Customer")
-                        .WithMany("cartItems")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DoAnThucTap.Models.Order", null)
                         .WithMany("CartItems")
                         .HasForeignKey("OrderId");
 
+                    b.HasOne("DoAnThucTap.Models.User", "Users")
+                        .WithMany("cartItems")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Camera");
 
-                    b.Navigation("Customer");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("DoAnThucTap.Models.Review", b =>
@@ -247,20 +352,26 @@ namespace DoAnThucTap.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DoAnThucTap.Models.Customer", "customer")
+                    b.HasOne("DoAnThucTap.Models.User", "Users")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Camera");
 
-                    b.Navigation("customer");
+                    b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("DoAnThucTap.Models.Customer", b =>
+            modelBuilder.Entity("DoAnThucTap.Models.Warehouses", b =>
                 {
-                    b.Navigation("cartItems");
+                    b.HasOne("DoAnThucTap.Models.Camera", "Camera")
+                        .WithMany()
+                        .HasForeignKey("CameraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Camera");
                 });
 
             modelBuilder.Entity("DoAnThucTap.Models.Order", b =>
@@ -268,9 +379,9 @@ namespace DoAnThucTap.Migrations
                     b.Navigation("CartItems");
                 });
 
-            modelBuilder.Entity("DoAnThucTap.Models.Tags", b =>
+            modelBuilder.Entity("DoAnThucTap.Models.User", b =>
                 {
-                    b.Navigation("Cameras");
+                    b.Navigation("cartItems");
                 });
 #pragma warning restore 612, 618
         }

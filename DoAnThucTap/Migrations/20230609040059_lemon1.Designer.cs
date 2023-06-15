@@ -4,6 +4,7 @@ using DoAnThucTap.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAnThucTap.Migrations
 {
     [DbContext(typeof(ADbContext))]
-    partial class ADbContextModelSnapshot : ModelSnapshot
+    [Migration("20230609040059_lemon1")]
+    partial class lemon1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,11 +117,6 @@ namespace DoAnThucTap.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("CartItems");
-                });
-
-            modelBuilder.Entity("DoAnThucTap.Models.Home", b =>
-                {
-                    b.ToTable("homes");
                 });
 
             modelBuilder.Entity("DoAnThucTap.Models.Menu", b =>

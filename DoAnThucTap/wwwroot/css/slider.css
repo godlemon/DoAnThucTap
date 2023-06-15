@@ -13,12 +13,12 @@
 	width: 2880px; 
 	position: relative; 
 }
-.slide { 
-	    padding:24px 25px; 
-	    width:31%; 
-	    float: left; 
-	    position: relative; 
- }
+.slide {
+    padding: inherit;
+    width: 31%;
+    float: left;
+    position: relative;
+}
  .slider-text{
  	float:left;
  	width:47%;
@@ -26,7 +26,6 @@
  	padding-top:3%;
  }
  .slider-img{
- 	float:left;
  	width:42%;
  }
 .slide h1{ 

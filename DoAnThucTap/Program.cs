@@ -1,4 +1,5 @@
 using DoAnThucTap.Models;
+using DoAnThucTap.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ADbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Connet")));
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton<IStorageService, FileStorageService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

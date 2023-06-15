@@ -1,12 +1,6 @@
-﻿<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <head>
-	<title>Free Home Shoppe Website Template | Home :: w3layouts</title>
+	<title>Chung Yên Lapptop</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -22,7 +16,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="header">
 			<div class="headertop_desc">
 				<div class="call">
-					<p><span>Hỗ trợ</span> Gọi cho chúng tôi <span class="number">- 0934953JQK</span></span></p>
+					<p><span>Hỗ trợ</span> Gọi cho chúng tôi <span class="number">- 0934953JQK</span></p>
 				</div>
 				<div class="account_desc">
 					<ul>
@@ -86,7 +80,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li><a href="delivery.html">Phương thức vận chuyển</a></li>
 						<li><a href="news.html">Thông tin</a></li>
 						<li><a href="contact.html">Liên hệ</a></li>
-						<div class="clear"></div>
 					</ul>
 				</div>
 				<div class="search_box">
@@ -101,19 +94,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="header_bottom_left" style="width:200px">
 					<div class="categories">
 						<ul>
+							
 							<h3>Danh mục</h3>
-							<li><a href="#">Camera IP</a></li>
-							<li><a href="#">Camera Dome</a></li>
-							<li><a href="#">Camera ngoài trời</a></li>
-							<li><a href="#">Camera PTZ (Pan-Tilt-Zoom)</a></li>
-							<li><a href="#">Đầu ghi hình</a></li>
-							<li><a href="#">Card ghi hình</a></li>
-							<li><a href="#">Máy test camera-CCTV Tester</a></li>
-							<li><a href="#">Phụ kiện Camera</a></li>
-							<li><a href="#">Ống kính HIKVISION</a></li>
-							<li><a href="#">Phụ kiện camera I-PRO</a></li>
-							<li><a href="#">Bộ nguồn-Adapter VANTECH</a></li>
-
+							@foreach (var tags in ViewBag.Tags)
+							{
+								<li><a href="#">@tags.Name</a></li>
+							}
 						</ul>
 					</div>
 				</div>
@@ -122,46 +108,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div id="slider">
 							<div id="mover">
 								<div id="slide-1" class="slide">
-									<div class="slider-img">
-										<a href="preview.html"><img src="images/camera_new.jpg" alt="learn more" style="width:300px; top:20px; padding-top: 70px;" /></a>
-									</div>
-									<div class="slider-text">
-										<h1>Thanh lý hàng<br><span>SALE</span></h1>
-										<h2>giảm giá lên tới 20%</h2>
-										<div class="features_list">
-											<h4>Tìm hiểu thêm về các dịch vụ đáng nhớ của chúng tôi!</h4>
-										</div>
-										<a href="preview.html" class="button">Mua ngay</a>
-									</div>
-									<div class="clear"></div>
+                                    <img style="max-width: 100%; height: auto" src="~/bannerimg/banner2.png" />
 								</div>
-								<div class="slide">
-									<div class="slider-text">
-										<h1>Thanh lý hàng<br><span>SALE</span></h1>
-										<h2>giảm giá lên tới 40%</h2>
-										<div class="features_list">
-											<h4>Tìm hiểu thêm về các dịch vụ đáng nhớ của chúng tôi.</h4>
-										</div>
-										<a href="preview.html" class="button">Mua ngay</a>
+								@foreach (var banner in ViewBag.Banners)
+								{
+									<div class="slide">
+										<img id="slide-1" style="max-width: 100%; height: auto" src="@banner.Url" />
 									</div>
-									<div class="slider-img">
-										<a href="preview.html"><img src="images/slide-3-image.jpg" alt="learn more" /></a>
-									</div>
-									<div class="clear"></div>
-								</div>
-								<div class="slide">
-									<div class="slider-img">
-										<a href="preview.html"><img src="images/slide-2-image.jpg" alt="learn more" /></a>
-									</div>
-									<div class="slider-text">
-										<h1>Thanh lý hàng<br><span>SALE</span></h1>
-										<h2>giảm giá lên tới 10%</h2>
-										<div class="features_list">
-											<h4>Tìm hiểu thêm về các dịch vụ đáng nhớ của chúng tôi.</h4>
-										</div>
-										<a href="preview.html" class="button">Mua ngay</a>
-									</div>
-									<div class="clear"></div>
+								}
 								</div>
 							</div>
 						</div>
@@ -305,7 +259,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 			</div>
 		</div>
-	</div>
 	<div class="footer">
 		<div class="wrap">
 			<div class="section group">
@@ -369,5 +322,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<a href="#" id="toTop"><span id="toTopHover"> </span></a>
 	
 </body>
-</html>
 
