@@ -1,4 +1,4 @@
-﻿namespace DoAnThucTap.Models
+﻿namespace DoAnThucTap.Areas.Admin.Models
 {
     public class Menu
     {

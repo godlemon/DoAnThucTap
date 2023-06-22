@@ -1,17 +1,22 @@
-﻿using DoAnThucTap.Constants;
+﻿using DoAnThucTap.Areas.Admin.Models;
+using DoAnThucTap.Constants;
 using DoAnThucTap.Models;
+using DoAnThucTap.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
-namespace DoAnThucTap.Controllers
+namespace DoAnThucTap.Areas.Admin.Controllers
 {
-	public class BannersController : Controller
+    public class BannersController : Controller
     {
         private readonly ADbContext _context;
+        private readonly IStorageService _storageService;
 
-        public BannersController(ADbContext context)
+        public BannersController(ADbContext context, IStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
         }
 
         // GET: Banners
@@ -51,17 +56,26 @@ namespace DoAnThucTap.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Url,active")] Banner banner)
+        public async Task<IActionResult> Create([Bind("Id,Name,Url,active")] Banner banner, IFormFile file)
         {
+            if (file != null)
+            {
+                var filePath = UploadPathConstant.BannerPath;
+                var savedFileName = await _storageService.SaveFileAsync(file, filePath);
+                banner.Url = savedFileName;
+            }
             if (ModelState.IsValid)
             {
-				banner.Url = UploadPathConstant.BannerPath + banner.Url;
-				_context.Add(banner);
+                _context.Add(banner);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(banner);
+            else
+            {
+                return View(banner);
+            }
         }
+
 
         // GET: Banners/Edit/5
         public async Task<IActionResult> Edit(int? id)

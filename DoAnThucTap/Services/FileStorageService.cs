@@ -1,47 +1,52 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using DoAnThucTap.Constants;
 
 namespace DoAnThucTap.Services
 {
-	public class FileStorageService : IStorageService
-	{
-		private IWebHostEnvironment hostingEnvironment;
+    public class FileStorageService : IStorageService
+    {
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-		public FileStorageService(IWebHostEnvironment hostingEnvironment)
-		{
-			this.hostingEnvironment = hostingEnvironment;
-		}
+        public FileStorageService(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
 
-		public async Task DeleteFileAsync(string filePath)
-		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), hostingEnvironment.WebRootPath, filePath);
+        public async Task<string> SaveFileAsync(IFormFile file, string filePath)
+        {
+            var fileNameUnique = DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetExtension(file.FileName);
+            var path = Path.Combine(_hostingEnvironment.WebRootPath, filePath, fileNameUnique);
 
-			if (File.Exists(path))
-			{
-				await Task.Run(() => File.Delete(path));
-			}
-		}
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
 
-		public async Task<string> SaveFileAsync(IFormFile file, string filePath)
-		{
-			var fileNameUnique = DateTime.Now.ToString("yyyyMMddHHmmss") + file.FileName?.Replace(" ", string.Empty);
-			var path = Path.Combine(Directory.GetCurrentDirectory(), hostingEnvironment.WebRootPath, filePath, fileNameUnique);
-			//var stream = new FileStream(path, FileMode.Create);
-			//await file.CopyToAsync(stream);
+            return Path.Combine(filePath, fileNameUnique);
+        }
 
-			using (var stream = new FileStream(path, FileMode.Create))
-			{
-				// Use stream
-				await file.CopyToAsync(stream);
-			}
+        public async Task<string> UpdateFileAsync(IFormFile file, string existingFilePath, string filePath)
+        {
+            if (file == null)
+            {
+                return existingFilePath;
+            }
 
-			return filePath + fileNameUnique;
-		}
-	}
+            await DeleteFileAsync(existingFilePath);
+            return await SaveFileAsync(file, filePath);
+        }
+
+        public async Task DeleteFileAsync(string filePath)
+        {
+            var path = Path.Combine(_hostingEnvironment.WebRootPath, filePath);
+
+            if (File.Exists(path))
+            {
+                await Task.Run(() => File.Delete(path));
+            }
+        }
+    }
 }

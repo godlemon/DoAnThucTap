@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DoAnThucTap.Models.Banner>
+﻿@model IEnumerable<Banner>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,7 +20,7 @@
                 @Html.DisplayNameFor(model => model.Url)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.active)
+                @Html.DisplayNameFor(model => model.Active)
             </th>
             <th></th>
         </tr>
@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.Url)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.active)
+                @Html.DisplayFor(modelItem => item.Active)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

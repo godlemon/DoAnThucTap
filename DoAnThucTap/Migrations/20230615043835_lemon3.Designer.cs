@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAnThucTap.Migrations
 {
     [DbContext(typeof(ADbContext))]
-    [Migration("20230609040413_lemon2")]
-    partial class lemon2
+    [Migration("20230615043835_lemon3")]
+    partial class lemon3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,9 @@ namespace DoAnThucTap.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Active")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -40,9 +43,6 @@ namespace DoAnThucTap.Migrations
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("active")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -117,11 +117,6 @@ namespace DoAnThucTap.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("CartItems");
-                });
-
-            modelBuilder.Entity("DoAnThucTap.Models.Home", b =>
-                {
-                    b.ToTable("homes");
                 });
 
             modelBuilder.Entity("DoAnThucTap.Models.Menu", b =>

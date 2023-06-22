@@ -5,26 +5,25 @@
 namespace DoAnThucTap.Migrations
 {
     /// <inheritdoc />
-    public partial class lemon2 : Migration
+    public partial class lemon3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "homes",
-                columns: table => new
-                {
-                },
-                constraints: table =>
-                {
-                });
+            migrationBuilder.DropColumn(
+                name: "BannerImg",
+                table: "banners");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "homes");
+            migrationBuilder.AddColumn<string>(
+                name: "BannerImg",
+                table: "banners",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
         }
     }
 }

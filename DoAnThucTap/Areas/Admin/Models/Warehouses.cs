@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using DoAnThucTap.Models;
 
-namespace DoAnThucTap.Models
+namespace DoAnThucTap.Areas.Admin.Models
 {
     public class Warehouses
     {
@@ -16,11 +17,11 @@ namespace DoAnThucTap.Models
         public decimal PriceSell { get; set; }
         [Required]
         [DisplayName("Số lượng nhập")]
-        public  int Amount { get; set; }
+        public int Amount { get; set; }
         [Required]
         [DisplayName("Số lượng đã bán")]
-        public  int Sold { get; set; }
-        public  int Active { get; set; }
-        
+        public int Sold { get; set; }
+        public int Active { get; set; }
+
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAnThucTap.Models;
 
-namespace DoAnThucTap.Controllers
+namespace DoAnThucTap.Areas.Admin.Controllers
 {
     public class TagsController : Controller
     {
@@ -21,9 +21,9 @@ namespace DoAnThucTap.Controllers
         // GET: Tags
         public async Task<IActionResult> Index()
         {
-              return _context.Tags != null ? 
-                          View(await _context.Tags.ToListAsync()) :
-                          Problem("Entity set 'ADbContext.Tags'  is null.");
+            return _context.Tags != null ?
+                        View(await _context.Tags.ToListAsync()) :
+                        Problem("Entity set 'ADbContext.Tags'  is null.");
         }
 
         // GET: Tags/Details/5
@@ -149,14 +149,14 @@ namespace DoAnThucTap.Controllers
             {
                 _context.Tags.Remove(tags);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TagsExists(int id)
         {
-          return (_context.Tags?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Tags?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

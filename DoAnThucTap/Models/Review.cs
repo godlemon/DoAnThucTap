@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DoAnThucTap.Areas.Admin.Models;
 
 namespace DoAnThucTap.Models
 {
